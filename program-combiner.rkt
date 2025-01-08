@@ -62,7 +62,6 @@
     (alternate-programs-recurse (brainfuck-state-build p-code input) (brainfuck-state-build q-code input) input '() #t)
   ))
 
-; (alternate-programs "alternate.txt" "alternate.txt" '(#\1 #\2 #\3 #\4 #\5 #\6))
 (define (parallel-programs p-filename q-filename input)
   (define sync-lock (make-lock))
   (define common-output '())
@@ -98,11 +97,4 @@
      (thread-wait thread2)
      common-output
   )))
-
-
-
-
-
-
-  
 
