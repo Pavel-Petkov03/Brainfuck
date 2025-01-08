@@ -1,0 +1,4 @@
+,           # Read input into the current cell.
+>           # Move to the next cell.
+[->++<]     # Multiply the input by 2.
+.           # Output the result.
