@@ -128,7 +128,7 @@ The function will alternate taking numbers from input which will make 1 , 3 inpu
 - `011` is "-"
 - `100` is "."
 - `101` is ","
-- `110` is "[<]"
+- `110` is "["
 - `111` is "]"
 
 
