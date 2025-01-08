@@ -92,7 +92,7 @@ The function will return the combined output from both programs.
 ```
 The reason in this case the output is not distributed between both the programs is that if the programs are too fast
 The first will be executed before the second
-### 4. `alternating-programs` Function
+### 4. `alternate-programs` Function
 
 #### Input:
 - `filename1` (string): The path to the first Brainfuck code file.
