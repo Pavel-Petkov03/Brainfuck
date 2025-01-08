@@ -5,7 +5,6 @@
   (apply brainfuck-decoder (brainfuck-state-build (brainfuck-bynary filename) input))
   )
 
-
 (define (to-brainfuck-encoding str)
   (cond
     [(string=? str "000") #\>]
@@ -18,8 +17,6 @@
     [(string=? str "111") #\] ]
   ))
  
-
-
 (define (get-bits byte)
   (let* ([bin-str (number->string byte 2)]
          [left-pad (make-string (- 8 (string-length bin-str)) #\0)]
@@ -46,7 +43,6 @@
   (list->string (map to-brainfuck-encoding (group (get-bits-array "") 3)))
   )
 
-
 (define (group str n)
   (define (helper remaining output current-len)
     (if (< current-len n)
@@ -55,5 +51,3 @@
         )
     )
   (helper str '() (string-length str)))
-
-

@@ -64,8 +64,6 @@
   )
 
 
-
-
 (define (read-brainfuck-until code input tape ip dp output code-len brackets-hash stop-at-input?)
   (if (>= ip code-len)
       (list input tape ip dp output)
@@ -102,7 +100,6 @@
           )
         )
   ))
-
 
 (define (get-brackets-hash code)
   (define (add-brackets-to-hash hash a b)
