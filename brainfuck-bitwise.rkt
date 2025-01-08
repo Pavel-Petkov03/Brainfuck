@@ -51,3 +51,5 @@
         )
     )
   (helper str '() (string-length str)))
+
+(provide bynary-to-brainfuck)

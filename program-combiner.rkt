@@ -98,3 +98,6 @@
      common-output
   )))
 
+(provide concatenate-programs)
+(provide alternate-programs)
+(provide parallel-programs)
