@@ -9,16 +9,6 @@
   )
   )
 
-
-(define (any? pred? lst)
-  (cond
-    [(null? lst) #f]
-    [(pred? (car lst)) #t]
-    [else
-     (any? (cdr pred? lst))
-     ]
-    ))
-
 (define (all? pred? lst)
   (cond
     [(null? lst) #t]
@@ -28,7 +18,7 @@
      ]
     ))
 
-(define valid-symbols '("." "," "[" "]" ">" "<" "+" "-"))
+(define valid-symbols '("." "," ">" "<" "+" "-"))
 
 (define (generate-next-level lst)
   (concatmap  (lambda (current-string)
@@ -64,8 +54,6 @@
   )
            
       
-
-
 (define (program-finder pairs)
   (define threads (make-hash)) ; code -> [(input, thread|result)]
   (define keys (map car pairs))
@@ -100,7 +88,7 @@
   (define (run-thread input code)
     (with-handlers
         (
-         [exn:fail? (lambda (exception) (hash-remove! threads code))]
+         [exn:fail? (lambda (exception) (lock! sync-lock (lambda () (hash-remove! threads code))))]
          )
       
       (let
@@ -109,7 +97,7 @@
         (if (not (equal? result (cadr (assoc input pairs))))
                                     
           (lock! sync-lock (lambda () (hash-remove threads code)))
-          (lock! sync-lock (lambda () (resolve-thread-in-hash code input result)))
+          (resolve-thread-in-hash code input result)
           )
     )))
     
@@ -140,5 +128,6 @@
 
   (iter (generate-solution-levels-stream))
 )
-    
-  
+
+
+(provide program-finder)
