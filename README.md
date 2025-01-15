@@ -133,7 +133,7 @@ The function will alternate taking numbers from input which will make 1 , 3 inpu
 
 #### Example Usage:
 ```scheme
-(bynary-to-brainfuck "testFiles/fourIdentity.b"  '(#\1 #\2 #\3 #\4))
+(bynary-to-brainfuck "testFiles/fourIdentity.bin"  '(#\1 #\2 #\3 #\4))
 ```
 #### Output:
 The function reads from bynary file bytes and convert them to the string ```,.,.,.,.```
@@ -141,13 +141,6 @@ The function reads from bynary file bytes and convert them to the string ```,.,.
 `(#\1 #\2 #\3 #\4)
 ```
 
-## Installation
-
-To get started with the project, clone the repository to your local machine using the following command:
-
-```
-git clone https://github.com/Pavel-Petkov03/Brainfuck.git
-```
 
 
 ### 6. `program-finder` Function
@@ -168,6 +161,16 @@ The function returns string which is the brainfuck program that transforms every
 ```
 #### Limitations:
 The program finder function is implemented by generating every possible brainfuck program from ```""``` and increasing length with every possible symbol, which means the algorythm has complexity of ```O(8^n)``` where n is the length of the brainfuck program. The solution of this function must be done with threads and parallel execution of the functon but racket has limitation for a lot of threads like in my case. This is the reason why i removed the possibility of creating infinite programs by removing the generation of loops ```[] symbols ```. The programs generated are fast for 6 symbols, after that the solution is very slow.
+
+## Installation
+
+To get started with the project, clone the repository to your local machine using the following command:
+
+```
+git clone https://github.com/Pavel-Petkov03/Brainfuck.git
+
+```
+
 ### Dependencies
 
 - Scheme (Racket or any compatible Scheme implementation)
@@ -175,6 +178,7 @@ The program finder function is implemented by generating every possible brainfuc
 ```
 raco pkg install rebellion/concurrency/lock
 ```
+
 
 ### Running the Code
 
