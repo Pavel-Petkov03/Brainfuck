@@ -54,15 +54,16 @@
     (define (iter key-val-pairs)
       (cond
         [(null? key-val-pairs) #f]
-        [(all? (lambda (pair) (not (thread? (cdr pair)))) (cdr key-val-pairs)) (car key-val-pairs)]
+        [(all? (lambda (pair) (not (thread? (cdr pair)))) (cdr key-val-pairs)) (caar key-val-pairs)]
         [else
          (iter (cdr key-val-pairs))
          ]
         )
       )
-    (begin (display (hash->list threads) ) (display "\n") (iter (hash->list threads)))
+    (iter (hash->list threads))
+  )
            
-      )
+      
 
 
 (define (program-finder pairs)
@@ -71,9 +72,11 @@
   (define sync-lock (make-lock))
 
   (define (add-thread key-hash-map input thread)
-    (if (hash-has-key? threads key-hash-map)
-        (hash-set! threads key-hash-map (cons (cons input thread) (hash-ref threads key-hash-map)))
-        (hash-set! threads key-hash-map (cons (cons input thread) '()))
+    (lock! sync-lock
+           (lambda () (if (hash-has-key? threads key-hash-map)
+               (hash-set! threads key-hash-map (cons (cons input thread) (hash-ref threads key-hash-map)))
+               (hash-set! threads key-hash-map (cons (cons input thread) '()))
+               ))
     ))
 
   (define (resolve-thread-in-hash key-hash-map input result)
@@ -87,9 +90,10 @@
       ))
     
     (when (hash-has-key? threads key-hash-map)
-      (begin
-      (hash-set! threads key-hash-map (recurse (hash-ref! threads key-hash-map)))
-      )
+      (lock! sync-lock
+             (lambda ()
+      (hash-set! threads key-hash-map (recurse (hash-ref threads key-hash-map)))
+      ))
     ))
   
 
@@ -102,9 +106,10 @@
       (let
           ([result (apply brainfuck-decoder (brainfuck-state-build code input))])
       
-        (if (not (equal? result (car (assoc input pairs))))
-          (hash-remove threads code)
-          (begin (resolve-thread-in-hash code input result))
+        (if (not (equal? result (cadr (assoc input pairs))))
+                                    
+          (lock! sync-lock (lambda () (hash-remove threads code)))
+          (lock! sync-lock (lambda () (resolve-thread-in-hash code input result)))
           )
     )))
     
