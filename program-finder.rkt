@@ -19,6 +19,7 @@
     ))
 
 (define valid-symbols '("." "," ">" "<" "+" "-"))
+; [ and ] removed for more programs generation
 
 (define (generate-next-level lst)
   (concatmap  (lambda (current-string)
