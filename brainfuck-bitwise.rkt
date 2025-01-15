@@ -37,7 +37,6 @@
              )
            (get-bits-array (string-append output (get-bits current-byte)))
             )
-       
       )
     )
   (list->string (map to-brainfuck-encoding (group (get-bits-array "") 3)))
