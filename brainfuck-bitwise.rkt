@@ -46,7 +46,7 @@
   (define (helper remaining output current-len)
     (if (< current-len n)
         (reverse output)
-        (helper (substring remaining n) (cons (substring remaining 0 n) output) (- current-len 3))
+        (helper (substring remaining n) (cons (substring remaining 0 n) output) (- current-len n))
         )
     )
   (helper str '() (string-length str)))

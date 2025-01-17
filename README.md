@@ -160,7 +160,7 @@ The function returns string which is the brainfuck program that transforms every
 ",..+."
 ```
 #### Limitations:
-The program finder function is implemented by generating every possible brainfuck program from ```""``` and increasing length with every possible symbol, which means the algorythm has complexity of ```O(8^n)``` where n is the length of the brainfuck program. The solution of this function must be done with threads and parallel execution of the functon but racket has limitation for a lot of threads like in my case. This is the reason why i removed the possibility of creating infinite programs by removing the generation of loops ```[] symbols ```. The programs generated are fast for 6 symbols, after that the solution is very slow.
+The program finder function is implemented by generating every possible brainfuck program from ```""``` and increasing length with every possible symbol, which means the algorithm has complexity of ```O(8^n)``` where n is the length of the brainfuck program. The solution of this function must be done with threads and parallel execution of the functon but racket has limitation for a lot of threads like in my case. This is the reason why i removed the possibility of creating infinite programs by removing the generation of loops ```[] symbols ```. The programs generated are fast for 6 symbols, after that the solution is very slow.
 
 ## Installation
 
